@@ -36,17 +36,15 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
+$ docker build -t syntric-app .
 
-# watch mode
-$ npm run start:dev
+$ docker build -t syntric-app .
 
-# production mode
-$ npm run start:prod
 ```
 
 ## Test
 http://localhost:3000/form-automation 
+
 
 ### Without using docker container with headless browser 
 http://localhost:3000/form-automation?headless=false 
