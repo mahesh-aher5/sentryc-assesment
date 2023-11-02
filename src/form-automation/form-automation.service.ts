@@ -4,10 +4,11 @@ import { DataDTO } from './data-dto';
 
 @Injectable()
 export class FormAutomationService {
-  async fillFormWithData(formData: DataDTO[]) {
+  async fillFormWithData(headless: string,formData: DataDTO[]) {
     try {
+      const isHeadLess = headless === 'false' ? false : true
       const browser = await puppeteer.launch({
-        headless: false,
+        headless: isHeadLess,
       });
       const page = await browser.newPage();
 
