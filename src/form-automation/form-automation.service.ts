@@ -9,6 +9,8 @@ export class FormAutomationService {
       const isHeadLess = headless === 'false' ? false : true
       const browser = await puppeteer.launch({
         headless: isHeadLess,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+
       });
       const page = await browser.newPage();
 

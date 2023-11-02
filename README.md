@@ -46,5 +46,7 @@ $ npm run start:prod
 ```
 
 ## Test
-http://localhost:3000/form-automation?headless=true
-http://localhost:3000/form-automation?headless=false
+http://localhost:3000/form-automation 
+
+# Without using docker container with headless browser 
+http://localhost:3000/form-automation?headless=false 
