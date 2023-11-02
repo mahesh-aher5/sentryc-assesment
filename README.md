@@ -32,8 +32,7 @@
 # development
 $ docker build -t syntric-app .
 
-$ docker build -t syntric-app .
-
+$ docker run -p 3000:3000 syntric-app
 ```
 
 ## Test
