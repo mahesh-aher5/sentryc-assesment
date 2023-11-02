@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { FormAutomationService } from './form-automation.service';
-import data from 'dummy-data';
+import data from 'test-data';
 
 @Controller('form-automation')
 export class FormAutomationController {

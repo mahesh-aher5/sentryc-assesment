@@ -5,7 +5,6 @@ import { DataDTO } from './data-dto';
 @Injectable()
 export class FormAutomationService {
   async fillFormWithData(formData: DataDTO[]) {
-    console.log('formData: ', formData);
     try {
       const browser = await puppeteer.launch({
         headless: false,
@@ -23,7 +22,7 @@ export class FormAutomationService {
         } else if (type === 'textarea') {
           await page.type(`textarea[name="${name}"]`, value);
         } else if (type === 'img') {
-          this.uploadFiles(page, name, value);
+          await this.uploadFiles(page, name, value);
         } else if (type === 'radio') {
           await this.clickOnRadio(page, name, value);
         }
@@ -31,10 +30,20 @@ export class FormAutomationService {
 
       await page.click("[type='checkbox']");
 
-    //   const submitButtonSelector = 'button[type="submit"]';
-      //   await page.click(submitButtonSelector);
+      const submitButtonSelector = 'button[type="submit"]';
+      await page.click(submitButtonSelector);
+      await page.waitForNavigation({timeout:40000});
 
-      await page.waitForNavigation();
+      const pageContent = await page.evaluate(() => {
+        return document.body.textContent;
+      });
+      if (
+        pageContent.includes(
+          'Terima kasih. Kamu telah masuk antrian layanan BukaBantuan.',
+        )
+      ) {
+        await browser.close();
+      }
 
       await browser.close();
     } catch (err: any) {
@@ -50,7 +59,7 @@ export class FormAutomationService {
   }
 
   async uploadFiles(page: puppeteer.Page, name: string, value: string) {
-    const fileHtmlInput = (await page.$(`[name="${name}"]`)) as any;
-    await fileHtmlInput.uploadFile(value);
+    const fileHtmlInput = (await page.$(`input[name="${name}"]`)) as any;
+    await fileHtmlInput.uploadFile('./img.png');
   }
 }
