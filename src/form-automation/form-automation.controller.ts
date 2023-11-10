@@ -8,7 +8,7 @@ export class FormAutomationController {
 
   @Get()
   async submitForm(@Query('headless') headless: string) {
-    await this.formAutomationService.fillFormWithData(headless, data);
-    return { message: 'Form submitted successfully' };
+    const res = await this.formAutomationService.fillFormWithData(headless, data);
+    return { message: res };
   }
 }
